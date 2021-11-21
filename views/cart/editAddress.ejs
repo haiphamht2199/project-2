@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>An Toàn điện</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="../../../stylesheets/css/bootstrap.min.css"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="../../stylesheets/css/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="../../stylesheets/css/slick-theme.css"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="../../stylesheets/css/nouislider.min.css"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="../../stylesheets/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="../../stylesheets/css/style.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- HEADER -->
+<%- include('../layouts/header'); -%>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+             <li><a><a href="/">Trang chủ</a></a></li>
+                <li><a><a href="/khoahoc/all">Tất cả</a></a></li>
+                <li><a><a href="/khoahoc/lop3">Lơp 3</a></a></li>
+                <li><a><a href="/khoahoc/lop4">Lớp 4</a></a></li>
+                <li><a><a href="/khoahoc/oppo">Lớp 5</a></a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+ <!-- container -->
+ <div class="container">
+     <!-- row -->
+     <div class="row">
+         <div class="col-md-12">
+             <h3 class="breadcrumb-header">Kiểm tra</h3>
+             <ul class="breadcrumb-tree">
+                 <li><a href="/">Trang chủ</a></li>
+                 <li class="active">Đặt hàng</li>
+             </ul>
+         </div>
+     </div>
+     <!-- /row -->
+ </div>
+ <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+ <!-- container -->
+ <div class="container">
+     <!-- row -->
+     <div class="row">
+         <form method="POST" action="/cart/editAddress/<%=data._id%>">
+             <div class="col-md-7">
+                 <!-- Billing Details -->
+                 <div class="billing-details">
+                     <div class="section-title">
+                         <h3 class="title">Địa chỉ thanh toán và nhận hàng</h3>
+                     </div>
+                     <div class="form-group">
+                         <input class="input" value="<%=data.nguoiNhan%>" type="text" name="nguoiNhan" placeholder="Tên">
+                     </div>
+                     <div class="form-group">
+                         <input class="input" value="<%=data.sdtNguoiNhan%>" type="tel" name="sdtNguoiNhan" placeholder="Số điện thoại">
+                     </div>
+                     <div class="form-group">
+                         <input class="input" value="<%=data.diaChiNhan%>" type="text" name="diaChiNhan" placeholder="Địa chỉ">
+                     </div>
+                     <div>
+                         <input class="primary-btn order-submit" type="submit" value="Thay đổi"/>
+                     </div>
+                 </div>
+                 <!-- /Billing Details -->
+             </div>
+             
+         </form>
+     </div>
+     <!-- /row -->
+ </div>
+ <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- FOOTER -->
+<footer id="footer">
+    <!-- top footer -->
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="footer-payments">
+                        <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                        <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                    </ul>
+                    <span class="copyright">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</span>
+                </div> 
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script src="../../javascripts/jquery.min.js"></script>
+<script src="../../javascripts/bootstrap.min.js"></script>
+<script src="../../javascripts/slick.min.js"></script>
+<script src="../../javascripts/nouislider.min.js"></script>
+<script src="../../javascripts/jquery.zoom.min.js"></script>
+<script src="../../javascripts/main.js"></script>
+<script src="../../javascripts/code.js"></script>
+</body>
+</html>

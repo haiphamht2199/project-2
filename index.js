@@ -30,8 +30,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 /**  */
-app.listen(3000, () => {
- console.log("server at http://localhost:3000 ")
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+ console.log("server at http://localhost: " + PORT)
 });
 app.use(expressSession({
  secret: 'Pham Dinh Hai 2199'

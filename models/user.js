@@ -1,41 +1,53 @@
 const mongoose = require('mongoose');
-
-const UserSchema = new mongoose.Schema({
- ten: {
+const userSchema = mongoose.Schema({
+ firstName: {
   type: String,
   required: true,
+  trim: true,
+  min: 3,
+  max: 30
  },
- ho: {
+ lastName: {
   type: String,
   required: true,
+  trim: 3,
+  min: 3,
+  max: 30
+ },
+ userName: {
+  type: String,
+  required: true,
+  trim: true,
  },
  email: {
   type: String,
-  require: true,
-  index: true,
+  required: true,
+  trim: true,
   unique: true,
-  sparse: true
- },
- diachi: {
-  type: String,
-  required: true,
- },
- tp: {
-  type: String,
-  required: true,
- },
- sdt: {
-  type: Number,
-  required: true,
+  lowercase: true
  },
  hash_password: {
   type: String,
-  required: true,
+  required: true
  },
- pofilePicture: { type: String },
  role: {
   type: String,
-  default: "user",
+  enum: ["user", "admin"],
+  default: "user"
+ },
+ contactNumber: {
+  type: Number
+ },
+ profilePicture: {
+  type: String
+ },
+ status: {
+  type: Boolean,
+  default: false
+ },
+ address: {
+  type: String,
+  required: true
  }
-})
-module.exports = mongoose.model('User', UserSchema);
+}, { timestamps: true });
+module.exports = mongoose.model("User", userSchema);

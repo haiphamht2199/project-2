@@ -1,45 +1,39 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
-const ejs = require('ejs');
-const cors = require('cors');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const expressSession = require('express-session');
-/**  */
-const indexRouter = require('./routes/index');
-const userRouter = require('./routes/user');
-const productRouter = require('./routes/product');
-const cartRouter = require('./routes/cart');
-const KhoaHoctRouter = require('./routes/KhoaHoc');
-const commentRouter = require('./routes/comment');
+const path = require('path');
+const fileUpload = require('express-fileupload')
 const app = express();
-app.use(express.json());
+const cors = require('cors');
+const adminRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/admin/category');
+const productRoutes = require('./routes/admin/product');
+const orderRouter = require('./routes/admin/order')
+const userRoutes = require('./routes/user/user');
+const uploadRoutes = require('./routes/upload');
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser());
 //connect mongoose
 dotenv.config();
-mongoose.connect('mongodb://localhost/AnToanDien', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/project1', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
  console.log('connect mongoose successfuly');
 });
-//set ejs
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
-/**  */
+app.use(cors());
+app.use(express.json());
+app.use(fileUpload({
+ useTempFiles: true
+}))
+app.use("/public", express.static(path.join(__dirname, "uploads")));
+app.use("/api", adminRoutes);
+app.use("/api", categoryRoutes);
+app.use("/api", productRoutes);
+app.use("/api", orderRouter);
+app.use("/api", uploadRoutes);
+app.use("/api", userRoutes);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
  console.log("server at http://localhost: " + PORT)
 });
-app.use(expressSession({
- secret: 'Pham Dinh Hai 2199'
-}))
-app.use('/', indexRouter);
-app.use('/users', userRouter);
-app.use('/khoahoc', productRouter)
-app.use('/cart', cartRouter);
-app.use('/comment', commentRouter);
-app.use('/khoahoc', KhoaHoctRouter);
+

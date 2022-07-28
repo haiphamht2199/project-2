@@ -35,19 +35,19 @@ const userSchema = mongoose.Schema({
   enum: ["user", "admin"],
   default: "user"
  },
- contactNumber: {
-  type: Number
- },
- profilePicture: {
-  type: String
- },
+ // contactNumber: {
+ //  type: Number
+ // },
+ // profilePicture: {
+ //  type: String
+ // },
  status: {
   type: Boolean,
   default: false
- },
- address: {
-  type: String,
-  required: true
  }
+ // address: {
+ //  type: String,
+ //  required: true
+ // }
 }, { timestamps: true });
 module.exports = mongoose.model("User", userSchema);

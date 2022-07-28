@@ -67,3 +67,63 @@ exports.addOrder = async (req, res, next) => {
 
   })
 }
+exports.BuyItNow = async (req, res, next) => {
+  const product = await Product.findOne({ _id: req.body.item._id });
+  var stock = product.stock;
+  var daBan = product.daBan
+  if (product) {
+    product.daBan = daBan + parseInt(req.body.item.quantity);
+    product.stock = stock - parseInt(req.body.item.quantity);
+    const newProduct = await product.save();
+    let orderStatus = [
+      {
+        type: "đặt hàng",
+        date: new Date(),
+        isCompleted: true
+      },
+      {
+        type: "đang đóng hàng",
+        isCompleted: false
+      },
+      {
+        type: "đang vận chuyển",
+        isCompleted: false
+      },
+      {
+        type: "đã giao hàng",
+        isCompleted: false
+      },
+    ];
+    let paymentMethod = req.body.paymentMethod == "1" ? "Thanh toán trực tiếp" : "Thanh toán trực tuyến"
+    let total = 0;
+    let items = [];
+    let item = {};
+    item.product = product._id;
+    item.name = product.name;
+    item.imageProduct = product.imageProduct;
+    item.quantity = parseInt(req.body.item.quantity);
+    if (req.body.item.price == product.price) {
+      item.price = product.price;
+      total = product.price * parseInt(req.body.item.quantity);
+    } else {
+      item.price = req.body.item.price;
+      total = req.body.item.price * parseInt(req.body.item.quantity);
+    }
+    items.push(item)
+    const order = new Order({
+      user: req.body.user._id,
+      totalAmount: total,
+      adress: req.body.user.address,
+      phoneNumber: req.body.user.phone,
+      paymentType: paymentMethod,
+      orderStatus: orderStatus,
+      items: items
+    });
+    order.save((error, order) => {
+      if (error) return res.status(400).json({ error });
+      if (order) {
+        res.status(201).json({ order });
+      }
+    });
+  }
+}

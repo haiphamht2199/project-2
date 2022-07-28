@@ -1,6 +1,7 @@
 
 const Product = require('../../models/product');
 const Order = require('../../models/order');
+const CP = require('../../models/CustomPrice');
 const shortid = require('shortid');
 const slugify = require('slugify');
 const mongoose = require('mongoose');
@@ -75,7 +76,7 @@ exports.deleteById = async (req, res, next) => {
   }
 }
 exports.getProducts = async (req, res, next) => {
-  const products = await Product.find({}).select("_id name stock daBan price quantity slug description category color ram boNhoTrong heDieuHanh camera imageProduct").populate({ path: "category", select: "_id name" }).exec();
+  const products = await Product.find({}).select("_id name stock daBan price quantity slug description category color ram boNhoTrong heDieuHanh camera imageProduct offer").populate({ path: "category", select: "_id name" }).exec();
   res.status(200).json(products);
 }
 exports.getTotalProduct = async (req, res, next) => {
@@ -169,4 +170,58 @@ exports.TOP3SPbanChayNhat = async (req, res, next) => {
     res.status(500).json(err);
   }
 
+}
+exports.CustomPrice = async (req, res, next) => {
+  try {
+    let products = req.body.users;
+    var selected = [];
+    // if (products) {
+    //   products.map((item, index) => {
+    //     if (item.isChecked) {
+    //       selected.push(item._id)
+    //     }
+    //   })
+    // }
+    if (req.body.id) {
+      const updateCp = await CP.findOneAndUpdate({ _id: req.body.id }, {
+        status: req.body.status === "1" ? true : false,
+        productType: req.body.type,
+        selecProduct: products,
+        value: req.body.value,
+        name: req.body.name,
+      }, {
+        new: true,
+      });
+      return res.status(200).json(updateCp);
+    } else {
+      const _cp = new CP({
+        name: req.body.name,
+        status: req.body.status ? true : false,
+        productType: req.body.type,
+        selecProduct: selected,
+        value: req.body.value
+      });
+      _cp.save((error, data) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ error })
+        }
+        if (data) {
+
+          return res.status(201).json({ cp: data })
+        }
+      })
+    }
+  } catch (error) {
+
+  }
+}
+exports.getCustomPrice = async (req, res, next) => {
+  try {
+    const cp = await CP.find({});
+
+    res.status(200).json(cp);
+  } catch (error) {
+
+  }
 }

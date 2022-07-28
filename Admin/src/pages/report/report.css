@@ -1,0 +1,9 @@
+.report{
+ flex:4;
+}
+.product{
+ height: 70px;
+ width: 70px;
+ align-items: center;
+ justify-content: center;
+}

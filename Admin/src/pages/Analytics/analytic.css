@@ -1,0 +1,23 @@
+.analytics{
+ flex: 4;
+}
+.products{
+ display: flex;
+ height: 400px;
+}
+.content{
+ margin-top: 107px;
+ margin-left: -90px;
+}
+.name{
+ display: flex;
+margin-top: 10px;
+
+ align-items: center;
+}
+/* .name01{
+ height: 30px;
+ width: 60px;
+ background-color: #0088FE;
+margin-right: 10px;
+} */

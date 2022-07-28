@@ -1,0 +1,40 @@
+.silderBar{
+ flex: 1;
+ height: calc(100vh-50px);
+ background-color: rgb(251, 251, 255);
+ position: sticky;
+ top: 50px;
+}
+.siderBarWrapper{
+ padding: 20px;
+ color: #555 !important;
+}
+.sideBarMenu{
+ margin-bottom: 10px;
+}
+.siBarTitle{
+ font-size: 17px;
+ color: rgb(187, 186, 255);
+}
+.siderBarList{
+ list-style: none;
+}
+.siderBarListIteam{
+ padding: 5px;
+ cursor: pointer;
+align-items: center;
+display: flex;
+border-radius: 10px;
+margin-left: -40px;
+}
+.sidebarIcon{
+ margin-right: 5px;
+ font-size: 13 !important;
+}
+.siderBarListIteam.active,.siderBarListIteam:hover{
+ background-color: rgb(240, 240, 255);
+}
+.link{
+ text-decoration: none;
+ color: #555
+}
